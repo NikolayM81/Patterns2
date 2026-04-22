@@ -25,6 +25,7 @@ public class DataGenerator {
 
     private static void sendRequest(DataGenerator.RegistrationDto user) {
 
+        assert givin() != null;
         givin()
                 .spec(requestSpec)
                 .body(user)
