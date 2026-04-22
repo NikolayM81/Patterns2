@@ -9,7 +9,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static ru.netology.DataGenerator.getRegisteredUser;
+import static ru.netology.DataGenerator.*;
 
 public class AuthTest {
     @BeforeEach
@@ -30,7 +30,7 @@ public class AuthTest {
     @Test
     @DisplayName("Should get error message if login with not registered user")
     void shouldGetErrorIfNotRegisteredUser() {
-        var notRegisteredUser = DataGenerator.getUser("active");
+        var notRegisteredUser = getUser("active");
         $("[data-test-id=login] .input").setValue(notRegisteredUser.getLogin());
         $("[data-test-id=password] .input").setValue(notRegisteredUser.getPassword());
         $("button.button").click();
@@ -56,7 +56,7 @@ public class AuthTest {
     @DisplayName("Should get error message if login with wrong login")
     void shouldGetErrorIfWrongLogin() {
         var registeredUser = getRegisteredUser("active");
-        var wrongLogin = DataGenerator.getRandomLogin();
+        var wrongLogin = getRandomLogin();
         $("[data-test-id=login] .input").setValue(wrongLogin);
         $("[data-test-id=password] .input").setValue(registeredUser.getPassword());
         $("button.button").click();
@@ -68,7 +68,7 @@ public class AuthTest {
     @DisplayName("Should get error message if login with wrong password")
     void shouldGetErrorIfWrongPassword() {
         var registeredUser = getRegisteredUser("active");
-        var wrongPassword = DataGenerator.getRandomPassword();
+        var wrongPassword = getRandomPassword();
         $("[data-test-id=login] .input").setValue(registeredUser.getLogin());
         $("[data-test-id=password] .input").setValue(wrongPassword);
         $("button.button").click();;
