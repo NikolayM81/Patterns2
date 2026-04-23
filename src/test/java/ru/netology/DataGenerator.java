@@ -9,6 +9,8 @@ import lombok.Value;
 
 import java.util.Locale;
 
+import static io.restassured.RestAssured.given;
+
 public class DataGenerator {
     private static final RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
@@ -25,8 +27,8 @@ public class DataGenerator {
 
     private static void sendRequest(DataGenerator.RegistrationDto user) {
 
-        assert givin() != null;
-        givin()
+        // assert givin() != null;
+        given()
                 .spec(requestSpec)
                 .body(user)
                 .when().log().all()
@@ -35,9 +37,9 @@ public class DataGenerator {
                 .statusCode(200);
     }
 
-    private static RequestSpecification givin() {
-        return null;
-    }
+    //private static RequestSpecification givin() {
+     //   return null;
+    //}
 
 
     public static String getRandomLogin() {
