@@ -10,11 +10,18 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.DataGenerator.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 
 public class AuthTest {
     @BeforeEach
     void setup() {
         open("http://localhost:9999");
+    }
+
+    @BeforeAll
+    public static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     @Test
@@ -69,6 +76,11 @@ public class AuthTest {
         $("[data-test-id=password] .input__control").setValue(wrongPassword);
         $("[data-test-id=action-login] .button__content").click();
         $("[data-test-id=error-notification] .notification__content").shouldBe(Condition.text("Ошибка! " + "Неверно указан логин или пароль"), Duration.ofSeconds(10));
+    }
+
+    @AfterAll
+    public static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
     }
 
 }

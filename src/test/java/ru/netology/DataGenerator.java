@@ -27,7 +27,6 @@ public class DataGenerator {
 
     private static void sendRequest(DataGenerator.RegistrationDto user) {
 
-        // assert givin() != null;
         given()
                 .spec(requestSpec)
                 .body(user)
@@ -36,10 +35,6 @@ public class DataGenerator {
                 .then().log().all()
                 .statusCode(200);
     }
-
-    //private static RequestSpecification givin() {
-     //   return null;
-    //}
 
 
     public static String getRandomLogin() {
